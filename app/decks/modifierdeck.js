@@ -9,8 +9,6 @@ export class ModifierDeck extends Deck {
     constructor() {
     	super(DECK_TYPES.MODIFIER, "Monster modifier deck");
 
-    	this.advantage_to_clean = false;
-
     	this.cards = [];
 		MODIFIER_DECK.forEach((card) => {
     		var c = new Card(card.type, card.shuffle, {image: card.image});
@@ -45,7 +43,7 @@ export class ModifierDeck extends Deck {
 
         eventbus.dispatch(["modifier_deck_changed", "modifier_card_added"], this, {"card": c, "bless": this.count(CARD_TYPES_MODIFIER.BLESS), "curse": this.count(CARD_TYPES_MODIFIER.CURSE), deck: this });
 
-    	this.shuffle();
+    	this.shuffle_without_reset();
 		return this.count(c.type);
     }
 
@@ -76,9 +74,15 @@ export class ModifierDeck extends Deck {
             return 0;
 
         eventbus.dispatch(["modifier_deck_changed", "modifier_card_removed"], this, {"card": removed_card, "bless": this.count(CARD_TYPES_MODIFIER.BLESS), "curse": this.count(CARD_TYPES_MODIFIER.CURSE), deck: this });
-        this.shuffle();    
+        this.shuffle_without_reset();    
 		
         return this.count(card_type);
+    }
+
+    shuffle_without_reset(){
+        let shuffle = this.shuffle_required;
+        this.shuffle();
+        this.shuffle_required = shuffle;
     }
     
     reset_deck(){

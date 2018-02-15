@@ -1,60 +1,54 @@
 'use strict';
 
-import { EVENT_NAMES } from '/app/constants.js';
-import { document_load, listen } from '/app/utils.js';
-import { init as scenarios_init } from '/app/menu/scenarios.js';
-import { init as decklist_init } from '/app/menu/decklist.js';
+import eventbus from '/app/tinycentraldispatch.js';
+import { document_load } from '/app/utils.js';
 
-function activate_tab(tabs, pages, activetab)
-{
-    for (let key in tabs)
-    {
-        tabs[key].className = (key == activetab) ? "" : "inactive";
+import Scenarios from '/app/menu/scenarios.js';
+//import { init as decklist_init } from '/app/menu/decklist.js';
+
+class Menu {
+    constructor(){
+        this.menu =      document.getElementById("settingspane");
+
+        this.pages = {
+            scenarios: { tab: document.getElementById("scenariotab"), page: document.getElementById("scenariospage") },
+            deck: { tab: document.getElementById("deckstab"), page: document.getElementById("deckspage") }
+        };
+
+        this.buttons = {
+            settings:       document.getElementById("settingsbtn"),
+            cancel:         document.getElementById("cancelarea")       
+        };
+
+        eventbus.onclick(this.pages.scenarios.tab, "settings_page", this, this.pages.scenarios);
+        eventbus.onclick(this.pages.deck.tab, "settings_page", this, this.pages.deck);
+        eventbus.onclick(this.buttons.settings, "settings_pane", this, {show: true});
+        eventbus.onclick(this.buttons.cancel, "settings_pane", this, {show: false});
+
+        eventbus.listen("settings_page", this, (p) => this.show_tab(p));
+        eventbus.listen("settings_pane", this, (p) => this.show_settingspane(p));
+        eventbus.listen("scenario_loaded", undefined, () => this.show_settingspane({show: false}));
+
+        new Scenarios();
     }
-    for (let key in pages)
-    {
-        pages[key].className = (key == activetab) ? "tabbody" : "inactive tabbody";
+
+    show_tab(param){
+        Object.keys(this.pages).forEach((key) => {
+            let active = this.pages[key] === param;
+            this.pages[key].tab.className = (active) ? "" : "inactive";
+            this.pages[key].page.className = (active) ? "tabbody" : "inactive tabbody";          
+        });
     }
-}
 
-function show_settingspane(pane, cancelarea, show)
-{
-    console.log("!!!!")
-    pane.className = show ? "pane" : "pane inactive";
-    cancelarea.style.display = show ? "initial" : "none";
-}
-
-function init_ui()
-{
-    let menu =      document.getElementById("settingspane");
-
-    let tabs =
+    show_settingspane(p)
     {
-        scenarios:      document.getElementById("scenariotab"),
-        decks:          document.getElementById("deckstab")
-    };
+        this.menu.className = p.show ? "pane" : "pane inactive";
+        this.buttons.cancel.style.display = p.show ? "initial" : "none";
+    }
 
-    let pages =
-    {
-        scenarios:      document.getElementById("scenariospage"),
-        decks:          document.getElementById("deckspage")
-    };
-
-    let buttons = {
-        settings:       document.getElementById("settingsbtn"),
-        cancel:         document.getElementById("cancelarea")       
-    };
-
-    tabs.scenarios.addEventListener("click", () => activate_tab(tabs, pages, "scenarios"));
-    tabs.decks.addEventListener("click", () => activate_tab(tabs, pages, "decks"));
-    buttons.settings.addEventListener("click", () => show_settingspane(menu, buttons.cancel, true));
-    buttons.cancel.addEventListener("click", () => show_settingspane(menu, buttons.cancel, false));
-    listen(EVENT_NAMES.LOAD_SCENARIO, () => show_settingspane(menu, buttons.cancel, false) );
-
-    activate_tab(tabs, pages, "scenarios");
-
-    scenarios_init();
-    decklist_init();
 }
 
-document_load(init_ui);
+let menu;
+document_load(() => menu = new Menu());
+
+export default menu;

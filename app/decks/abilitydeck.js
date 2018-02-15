@@ -16,7 +16,6 @@ export class AbilityDeck extends Deck{
         
         this.cards = [];
         this.level = level;
-        this.advantage_to_clean = false;
 
         let monster = MONSTERS[this.name];
         this.stats = monster.levels.find((l) => l.level === level);
@@ -24,8 +23,9 @@ export class AbilityDeck extends Deck{
         let deck_definition = DECK_DEFINITONS[deck.class];
         
         deck_definition.cards.forEach((card) => {
-            let shuffle = card.shift();
-            var c = new Card(deck.name + " " + card[0], shuffle, {content: card});
+            let clone = JSON.parse(JSON.stringify(card))
+            let shuffle = clone.shift();
+            var c = new Card(deck.name + " " + clone[0], shuffle, {content: clone});
             this.cards.push(c);
         });
     }

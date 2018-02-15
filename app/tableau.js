@@ -1,8 +1,7 @@
 
 'use strict';
 
-import { listen, document_load } from '/app/utils.js';
-import { EVENT_NAMES } from '/app/constants.js';
+import { document_load } from '/app/utils.js';
 
 import eventbus from '/app/tinycentraldispatch.js';
 
@@ -11,50 +10,72 @@ import { AbilityDeck } from '/app/decks/abilitydeck.js';
 import { ModifierDeckRenderer } from '/app/renderers/modifierdeck.js';
 import { AbilityDeckRenderer } from '/app/renderers/abilitydeck.js';
 
-let container = document.getElementById("tableau");
+class Tableau {
+	constructor(container){
+		this.container = container;
 
-let ability_decks = [];
+		this.ability_decks = [];
+		this.modifier_deck = undefined;
 
-var modifier_deck;
-var modifier_deck_renderer;
+		eventbus.listen("load_scenario", undefined, (p) => this.load_scenario(p));
+	}
 
-function create_container(){
-    let modifier_container = document.createElement("div");
-    modifier_container.className = "card-container";
+	activate_verbose(){
+		eventbus.listen("cards_drawn", undefined, (c) => console.log(c.deck.name + ' - cards left:',  c.deck.cards.length) );
+		eventbus.listen("modifier_deck_changed", undefined, console.log );
+		eventbus.listen("deck_shuffled", undefined, console.log );
 
-    container.appendChild(modifier_container);
-    return modifier_container;
+		window.eventbus = eventbus;
+		return this;
+	}
+
+	create_deck_container(){
+    	let modifier_container = document.createElement("div");
+    	modifier_container.className = "card-container";
+    	this.container.appendChild(modifier_container);
+    	return modifier_container;
+	}
+
+	create_modifier_deck(){
+	 	let modifier_container = this.create_deck_container();
+	 	modifier_container.id = "modifier-container";
+	 	
+	 	this.modifier_deck = new ModifierDeck();
+	 	this.modifier_deck.shuffle();
+
+	 	this.modifier_deck_renderer = new ModifierDeckRenderer(this.modifier_deck, modifier_container);
+	 	this.modifier_deck_renderer.render();
+	}
+
+	create_ability_decks(scenario, level){
+		this.ability_decks = [];
+	 	scenario.decks.forEach((deck) => {
+	 		let ability = new AbilityDeck(deck, level);
+	 		this.ability_decks.push(ability.shuffle());
+	 	});
+
+	 	this.ability_decks.forEach((ability) => {
+		 	let container = this.create_deck_container();
+	 		let renderer = new AbilityDeckRenderer(ability, container);
+	 		renderer.render();	 		
+	 	});
+	}
+
+	clear_container(){
+
+		this.modifier_deck = undefined;
+
+		while (this.container.firstChild) {
+   			this.container.removeChild(this.container.firstChild);
+		}
+	}
+
+	load_scenario(load){
+		this.clear_container();
+		this.create_modifier_deck();
+		this.create_ability_decks(load.scenario, load.level);
+		eventbus.dispatch("scenario_loaded", this, load);
+	}
 }
 
-function load_scenario(event) {
-
-	let modifier_container = create_container();
-	modifier_container.id = "modifier-container";
-
-	modifier_deck = new ModifierDeck();
-	modifier_deck.shuffle();
-	modifier_deck_renderer = new ModifierDeckRenderer(modifier_deck, modifier_container);
-	modifier_deck_renderer.render();
-
-
-	event.decks.forEach(function(deck) {
-		let container = create_container();
-		let ability = new AbilityDeck(deck, event.level);
-		ability_decks.push(ability.shuffle());
-		let renderer = new AbilityDeckRenderer(ability, container);
-		renderer.render();
-	});
-
-	eventbus.listen("cards_drawn", undefined, (c) => console.log(c.deck.name + ' - cards left:',  c.deck.cards.length) );
-	eventbus.listen("modifier_deck_changed", undefined, console.log );
-
-	window.ability = ability_decks;
-	window.deck = modifier_deck;
-}
-
-function init() {
-
-	listen(EVENT_NAMES.LOAD_SCENARIO, load_scenario);
-}
-
-document_load(init);
+document_load(new Tableau(document.getElementById("tableau")).activate_verbose());

@@ -1,25 +1,31 @@
 
 class TinyCentralDispatch {
 
-    constructor(){
+    constructor(disable_default_listener){
         this.subscribers = {};
+
+        if (disable_default_listener)
+            return;
+
+        // adding a default listener
+        this.listen("default", undefined, console.log);
     }
 
     listen(event, predicate_or_source, callback){
         this.subscribers[event] = this.subscribers[event] || [];
 
-        let pa = { callback: callback };
+        let event_settings = { callback: callback };
 
         if (typeof predicate_or_source === 'function')
-            pa.predicate = predicate_or_source;
+            event_settings.predicate = predicate_or_source;
         else
-            pa.source = predicate_or_source;
+            event_settings.source = predicate_or_source;
 
-        this.subscribers[event].push(pa);
+        this.subscribers[event].push(event_settings);
     }
 
     dispatch(events, invoked_by, parameters){
-        parameters = parameters;
+        parameters = parameters || {};
         events = [].concat(...[events]);
 
         events.forEach((event) => {
@@ -37,6 +43,8 @@ class TinyCentralDispatch {
 
             }).forEach((subscriber) => subscriber.callback(parameters));
 
+            if (this.subscribers["*"])
+                this.subscribers["*"].forEach((subscriber) => subscriber.callback(parameters));
         });
     }
 
@@ -51,7 +59,4 @@ class TinyCentralDispatch {
 }
 
 let eventbus = new TinyCentralDispatch();
-eventbus.listen("default", undefined, console.log);
-
-window.eventbus = eventbus;
 export default eventbus;
