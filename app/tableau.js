@@ -18,6 +18,7 @@ class Tableau {
 		this.modifier_deck = undefined;
 
 		eventbus.listen("load_scenario", undefined, (p) => this.load_scenario(p));
+		eventbus.listen("load_deck", undefined, (p) => this.load_deck(p));
 	}
 
 	activate_verbose(){
@@ -45,11 +46,15 @@ class Tableau {
 
 	 	this.modifier_deck_renderer = new ModifierDeckRenderer(this.modifier_deck, modifier_container);
 	 	this.modifier_deck_renderer.render();
+
+	 	eventbus.dispatch("deck_loaded", this.modifier_deck, {deck: this.modifier_deck});
 	}
 
-	create_ability_decks(scenario, level){
+	create_ability_decks(decks, level){
+	
 		this.ability_decks = [];
-	 	scenario.decks.forEach((deck) => {
+	 	decks.forEach((deck) => {
+	 			console.log(deck)
 	 		let ability = new AbilityDeck(deck, level);
 	 		this.ability_decks.push(ability.shuffle());
 	 	});
@@ -57,7 +62,9 @@ class Tableau {
 	 	this.ability_decks.forEach((ability) => {
 		 	let container = this.create_deck_container();
 	 		let renderer = new AbilityDeckRenderer(ability, container);
-	 		renderer.render();	 		
+	 		renderer.render();
+
+	 		eventbus.dispatch("deck_loaded", ability, {deck: ability});
 	 	});
 	}
 
@@ -73,8 +80,14 @@ class Tableau {
 	load_scenario(load){
 		this.clear_container();
 		this.create_modifier_deck();
-		this.create_ability_decks(load.scenario, load.level);
+		this.create_ability_decks(load.scenario.decks, load.level);
 		eventbus.dispatch("scenario_loaded", this, load);
+	}
+
+	load_deck(deck){
+		if (!this.modifier_deck)
+			this.create_modifier_deck();
+		this.create_ability_decks([deck.deck], deck.level)
 	}
 }
 

@@ -65,6 +65,7 @@ ul.tabcontainer li:not(:first-child)
 ul.tabcontainer .inactive
 {
     background-color:   #CCCCCC;
+    border-bottom:        1px solid black;   
 }
 
 .tabbody
@@ -104,6 +105,11 @@ ul.tabcontainer .inactive
     font-size:          1.2em;
 }
 
+#deckspage select{
+    display:            inline;
+    font-size:          1.2em;
+}
+
 #deckspage input[type=checkbox]{
     width:              1em;
 }
@@ -133,6 +139,7 @@ ul.tabcontainer .inactive
     top:                0;
     left:               0;
     max-width:          100vw;
+    min-width:          33vw;
     height:             0;
     z-index:            2;
 }

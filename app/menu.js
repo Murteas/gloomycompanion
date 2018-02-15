@@ -4,7 +4,7 @@ import eventbus from '/app/tinycentraldispatch.js';
 import { document_load } from '/app/utils.js';
 
 import Scenarios from '/app/menu/scenarios.js';
-//import { init as decklist_init } from '/app/menu/decklist.js';
+import Decklist from '/app/menu/decklist.js';
 
 class Menu {
     constructor(){
@@ -30,6 +30,7 @@ class Menu {
         eventbus.listen("scenario_loaded", undefined, () => this.show_settingspane({show: false}));
 
         new Scenarios();
+        new Decklist();
     }
 
     show_tab(param){
