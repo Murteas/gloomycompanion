@@ -99,6 +99,13 @@ ul.tabcontainer .inactive
     text-align:         right;
 }
 
+.selectionlist .head{
+    font-size: 1.25em;
+    margin-bottom: 8px;
+    margin-top: 25px;
+    font-weight: bold;
+}
+
 #deckspage input{
     display:            inline;
     width:              2em;
@@ -139,7 +146,7 @@ ul.tabcontainer .inactive
     top:                0;
     left:               0;
     max-width:          100vw;
-    min-width:          33vw;
+    min-width:          425px;
     height:             0;
     z-index:            2;
 }
@@ -183,4 +190,22 @@ ul.tabcontainer .inactive
     height:             5ch;
     cursor:             pointer;
     z-index:            1;
+}
+
+#active_decks span{
+    width: 250px;
+    display: inline-block;
+}
+
+#active_decks img {
+    height: 1.5em;
+
+    vertical-align: sub;
+    margin-left: 4px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#active_decks li{
+    margin-top: 15px;
 }

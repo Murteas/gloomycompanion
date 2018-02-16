@@ -19,6 +19,7 @@ class Tableau {
 
 		eventbus.listen("load_scenario", undefined, (p) => this.load_scenario(p));
 		eventbus.listen("load_deck", undefined, (p) => this.load_deck(p));
+		eventbus.listen("deck_remove", undefined, (p) => this.remove_deck(p.deck))
 	}
 
 	activate_verbose(){
@@ -51,25 +52,34 @@ class Tableau {
 	}
 
 	create_ability_decks(decks, level){
-	
-		this.ability_decks = [];
+
 	 	decks.forEach((deck) => {
-	 			console.log(deck)
 	 		let ability = new AbilityDeck(deck, level);
-	 		this.ability_decks.push(ability.shuffle());
-	 	});
-
-	 	this.ability_decks.forEach((ability) => {
-		 	let container = this.create_deck_container();
-	 		let renderer = new AbilityDeckRenderer(ability, container);
-	 		renderer.render();
-
-	 		eventbus.dispatch("deck_loaded", ability, {deck: ability});
+	 		ability.shuffle();
+	 		this.ability_decks.push({deck: ability, renderer: null});
 	 	});
 	}
 
-	clear_container(){
+	render_ability_decks(){
+	 	this.ability_decks.filter((tuple) => !tuple.renderer)
+	 	                  .forEach((tuple) => {
+		 	let container = this.create_deck_container();
+			tuple.renderer = new AbilityDeckRenderer(tuple.deck, container);
+	 		tuple.renderer.render();
+	 		eventbus.dispatch("deck_loaded", tuple.deck, {deck: tuple.deck});
+	 	});
+	}
 
+	remove_deck(removed_deck){
+		let deck = this.ability_decks.find(a => a.deck === removed_deck);
+		if (!deck)
+			return;
+		deck.renderer.remove();
+		this.ability_decks = this.ability_decks.filter(a => a.deck !== removed_deck);
+		eventbus.dispatch("deck_removed", removed_deck, {deck: removed_deck});
+	}
+
+	clear_container(){
 		this.modifier_deck = undefined;
 
 		while (this.container.firstChild) {
@@ -81,6 +91,7 @@ class Tableau {
 		this.clear_container();
 		this.create_modifier_deck();
 		this.create_ability_decks(load.scenario.decks, load.level);
+		this.render_ability_decks();
 		eventbus.dispatch("scenario_loaded", this, load);
 	}
 
@@ -88,6 +99,7 @@ class Tableau {
 		if (!this.modifier_deck)
 			this.create_modifier_deck();
 		this.create_ability_decks([deck.deck], deck.level)
+		this.render_ability_decks();
 	}
 }
 

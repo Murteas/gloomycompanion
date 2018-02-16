@@ -25,6 +25,10 @@ export class DeckRenderer{
         return this.uiCards;
     }
 
+    remove(){
+        this.deck_space.remove();
+    }
+
     ondrawn(cards) {
         this.uiCards.forEach((c, i) => {
             c.push_down();
