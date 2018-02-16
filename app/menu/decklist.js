@@ -2,7 +2,6 @@
 
 import eventbus from '/app/tinycentraldispatch.js';
 import { DECKS } from '/app/data/cards.js';
-import { AbilityDeck } from '/app/decks/abilitydeck.js';
 
 export class Decklist {
     constructor(){
@@ -38,7 +37,7 @@ export class Decklist {
 
         eventbus.onclick(this.deck_add.apply, "load_deck", this, this.additional_deck);
         eventbus.listen("scenario_loaded", undefined, (a) => this.set_level_to_scenario(a));
-        eventbus.listen("deck_loaded", (deck) => deck instanceof AbilityDeck, (a) => this.add_active_deck(a));
+        eventbus.listen("deck_loaded", (deck) => !!deck.stats, (a) => this.add_active_deck(a));
     }
 
     register_events(element){

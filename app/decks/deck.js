@@ -72,5 +72,4 @@ export class Deck {
     }
 }
 
-export { Card } from '/app/decks/card.js';
 export default Deck;

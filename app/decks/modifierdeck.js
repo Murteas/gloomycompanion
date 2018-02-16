@@ -1,7 +1,8 @@
 'use strict';
 
 import eventbus from '/app/tinycentraldispatch.js';
-import { Deck, Card } from '/app/decks/deck.js';
+import { Deck } from '/app/decks/deck.js';
+import { Card } from '/app/decks/card.js';
 import { DECK_TYPES } from '/app/constants.js';
 import { MODIFIER_DECK, MODIFIER_CARDS, CARD_TYPES_MODIFIER } from '/app/data/modifiercards.js';
 

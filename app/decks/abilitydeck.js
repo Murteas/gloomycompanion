@@ -1,11 +1,9 @@
 'use strict';
 
-import { Deck, Card } from '/app/decks/deck.js';
-import { DECK_TYPES, EVENT_NAMES } from '/app/constants.js';
-import { listen } from '/app/utils.js';
-import { DECKS, DECK_DEFINITONS } from '/app/data/cards.js';
-import { MONSTERS } from '/app/data/monsterstats.js'
-
+import { Deck } from '/app/decks/deck.js';
+import { Card } from '/app/decks/card.js';
+import { DECKS, DECK_DEFINITONS } from '/app/data/cards.js'; 
+import { MONSTERS } from '/app/data/monsterstats.js' 
 
 export class AbilityDeck extends Deck{
     constructor(deckType, level) {
@@ -23,7 +21,7 @@ export class AbilityDeck extends Deck{
         let deck_definition = DECK_DEFINITONS[deck.class];
         
         deck_definition.cards.forEach((card) => {
-            let clone = JSON.parse(JSON.stringify(card))
+            let clone = JSON.parse(JSON.stringify(card));
             let shuffle = clone.shift();
             var c = new Card(deck.name + " " + clone[0], shuffle, {content: clone});
             this.cards.push(c);

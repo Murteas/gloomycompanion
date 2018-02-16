@@ -1,4 +1,3 @@
-
 'use strict';
 
 import { document_load } from '/app/utils.js';
