@@ -13,7 +13,8 @@ export class AbilityDeck extends Deck{
         super(deck.class, deckType.name);
         
         this.cards = [];
-        this.level = level;
+        this.level = level + (deckType.extra_levels || 0);
+        this.level = Math.max(Math.min(7, this.level), 0);
 
         let monster = MONSTERS[this.name];
         this.stats = monster.levels.find((l) => l.level === level);
