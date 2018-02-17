@@ -1,7 +1,8 @@
 'use strict';
 
 import eventbus from '/app/tinycentraldispatch.js';
-import { SCENARIO_DEFINITIONS } from '/app/data/scenarios.js';
+import { CAMPAIGNS } from '/app/data/scenarios.js';
+import CampaignLevelSelector from '/app/renderers/campaignlevelselector.js'
 
 export class Scenarios {
 	constructor(){
@@ -9,17 +10,24 @@ export class Scenarios {
 
 		this.form = {
 			level: document.getElementById('scenario_level'),
-			number: document.getElementById('scenario_number'),
-			load: document.getElementById('applyscenario')
+			load: document.getElementById('applyscenario'),
+			campaigns: document.getElementById('campaigns')
 		};
 
-		this.form.number.max = SCENARIO_DEFINITIONS.length;
+		Object.keys(CAMPAIGNS).forEach((key) => {
+			let selector = new CampaignLevelSelector(key, CAMPAIGNS[key], this.form.campaigns, (scen, campaign) => this.load_scenario(scen, campaign) );
+			selector.render();
+		});
 
-		this.read_settings();
-		eventbus.onclick(this.form.load, "load_scenario", this, this.selected_scenario);
-
-		this.register_events(this.form.number);
 		this.register_events(this.form.level);
+		this.read_settings(true);
+	}
+
+	load_scenario(scenario, campaign){
+		this.selected_scenario.scenario = scenario; 
+		this.selected_scenario.campaign = campaign;
+		
+		eventbus.dispatch("load_scenario", this, this.selected_scenario); 
 	}
 
 	register_events(element){
@@ -30,12 +38,6 @@ export class Scenarios {
 	}
 
 	read_settings(reset){
-		
-		var scenario = parseInt(this.form.number.value);
-		if (isNaN(scenario))
-			scenario = 1;
-		scenario = Math.min(Math.max(1,scenario), SCENARIO_DEFINITIONS.length);
-		this.selected_scenario.scenario = SCENARIO_DEFINITIONS[scenario-1];
 
 		var level = parseInt(this.form.level.value);
 		if (isNaN(level))
@@ -44,7 +46,6 @@ export class Scenarios {
 		this.selected_scenario.level = level;
 
 		if (!reset){
-			this.form.number.value = scenario;
 			this.form.level.value = level;
 		}
 	}

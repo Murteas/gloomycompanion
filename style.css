@@ -93,8 +93,7 @@ ul.tabcontainer .inactive
 .selectionlist input 
 {
     margin:             5px;
-    width:              3em;
-    display:            block;
+    width:              2em;
     font-size:          1.6em;
     text-align:         right;
 }
@@ -112,7 +111,7 @@ ul.tabcontainer .inactive
     font-size:          1.2em;
 }
 
-#deckspage select{
+#deckspage select, #scenariospage select{
     display:            inline;
     font-size:          1.2em;
 }
@@ -134,7 +133,7 @@ ul.tabcontainer .inactive
     float:              left;
     font-family:        'Philosopher';
     font-size:          2em;
-    padding-left:       40px;
+    margin-left:       40px;
     height:             2em;
     line-height:        2em;
     overflow:           hidden;

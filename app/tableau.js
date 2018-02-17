@@ -17,6 +17,8 @@ class Tableau {
 		this.modifier_deck = undefined;
 
 		eventbus.listen("load_scenario", undefined, (p) => this.load_scenario(p));
+		eventbus.listen("load_scenario", undefined, (p) => this.set_scenario_name(p));
+		
 		eventbus.listen("load_deck", undefined, (p) => this.load_deck(p));
 		eventbus.listen("deck_remove", undefined, (p) => this.remove_deck(p.deck))
 	}
@@ -70,7 +72,9 @@ class Tableau {
 	}
 
 	remove_deck(removed_deck){
+
 		let deck = this.ability_decks.find(a => a.deck === removed_deck);
+
 		if (!deck)
 			return;
 		deck.renderer.remove();
@@ -79,7 +83,9 @@ class Tableau {
 	}
 
 	clear_container(){
+
 		this.modifier_deck = undefined;
+		this.ability_decks.forEach((deck) => this.remove_deck(deck.deck));
 
 		while (this.container.firstChild) {
    			this.container.removeChild(this.container.firstChild);
@@ -99,6 +105,11 @@ class Tableau {
 			this.create_modifier_deck();
 		this.create_ability_decks([deck.deck], deck.level)
 		this.render_ability_decks();
+	}
+
+	set_scenario_name(load){
+		let namebox = document.getElementById("scenarioname");
+		namebox.textContent = (load.scenario || {name: ""}).name;
 	}
 }
 

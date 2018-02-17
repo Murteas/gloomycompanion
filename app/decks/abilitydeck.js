@@ -13,13 +13,16 @@ export class AbilityDeck extends Deck{
         super(deck.class, deckType.name);
         
         this.cards = [];
-        this.level = level + (deckType.extra_levels || 0);
+        this.level = level + (deckType.level || 0);
         this.level = Math.max(Math.min(7, this.level), 0);
 
         let monster = MONSTERS[this.name];
         this.stats = monster.levels.find((l) => l.level === level);
 
-        let deck_definition = DECK_DEFINITONS[deck.class];
+        var deck_definition = DECK_DEFINITONS[deck.class];
+
+        if (deckType.cards)
+            deck_definition.cards = deckType.cards;
         
         deck_definition.cards.forEach((card) => {
             let clone = JSON.parse(JSON.stringify(card));

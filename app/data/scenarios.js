@@ -1,6 +1,6 @@
 'use strict';
 
-const SCENARIO_DEFINITIONS =
+const CORE =
     [   { name: "#1 Black Barrow",
           decks:
             [   {"name": "Bandit Guard"},
@@ -223,7 +223,7 @@ const SCENARIO_DEFINITIONS =
         },
         { name: "#28 Outer Ritual Chamber",
           decks:
-            [   {"name": "Living Corpse", "extra_levels": 2},
+            [   {"name": "Living Corpse", "level": 2},
                 {"name": "Cultist"},
                 {"name": "Living Bones"},
                 {"name": "Night Demon"},
@@ -761,5 +761,214 @@ const SCENARIO_DEFINITIONS =
         }
     ];
 
+const INTO_THE_UNKNOWN =
+    [   { name: "#1 Just Another Night",
+          decks:
+            [   {"name": "Bandit Archer"},
+                {"name": "Bandit Guard"},
+                {"name": "Inox Archer"},
+                {"name": "Inox Guard"},
+                {"name": "Inox Shaman"}
+            ]
+        },
+        { name: "#2 A Quatryl Scorned",
+          decks:
+            [   {"name": "Bandit Archer"},
+                {"name": "Bandit Guard"},
+                {"name": "Ancient Artillery"}
+            ]
+        },
+        { name: "#3 Unreliable Medicine",
+          decks:
+            [   {"name": "Giant Viper"},
+                {"name": "Earth Demon"},
+                {"name": "Vermling Scout"},
+                {"name": "Vermling Shaman"}
+            ]
+        },
+        { name: "#4 Unlikely Allies",
+          decks:
+            [   {"name": "Vermling Scout"},
+                {"name": "Giant Viper"}
+            ]
+        },
+        { name: "#5 The Sun Spire",
+          decks:
+            [   {"name": "Vermling Scout"},
+                {"name": "Sun Demon"},
+                {"name": "Black Imp"},
+                {"name": "Vermling Shaman"}
+            ]
+        },
+        { name: "#6 A Ship in a Storm",
+          decks:
+            [   {"name": "Wind Demon"},
+                {"name": "Lurker"},
+                {"name": "Frost Demon"}
+            ]
+        },
+        { name: "#7 Arrival in Chains",
+          decks:
+            [   {"name": "Cave Bear"},
+                {"name": "Rending Drake"},
+                {"name": "Spitting Drake"},
+                {"name": "Stone Golem"}
+            ]
+        },
+        { name: "#8 The Doctor’s Lab",
+          decks:
+            [   {"name": "Living Bones"},
+                {"name": "Cultist"},
+                {"name": "Living Spirit"}
+            ]
+        },
+        { name: "#9 Skewed Perspective",
+          decks:
+            [   {"name": "Hound"},
+                {"name": "Vermling Scout"},
+                {"name": "Merciless Overseer", "class": "Boss"}
+            ]
+        },
+        { name: "#10 Panic Room",
+          decks:
+            [   {"name": "Night Demon"},
+                {"name": "Deep Terror"}
+            ]
+        }];
+
+const SOLO_SCENARIOS =
+    [   { name: "Return to the Black Barrow",
+          decks:
+            [   {"name": "Bandit Guard", "level": -1},
+                {"name": "Bandit Archer", "level": -1},
+                {"name": "Living Bones", "level": -1}
+            ]
+        },
+        { name: "An Unfortunate Intrusion",
+          decks:
+            [   {"name": "City Guard", "shield": -1},
+                {"name": "Vermling Scout"},
+                {"name": "Vermling Shaman"}
+            ]
+        },
+        { name: "Corrupted Laboratory",
+          decks:
+            [   {"name": "Black Imp"},
+                {"name": "Spitting Drake"},
+                {"name": "Stone Golem"}
+            ]
+        },
+        { name: "Armory Heist",
+          decks:
+            [   {"name": "City Guard", "shield": 3},
+                {"name": "Stone Golem", "shield": 4},
+                {"name": "Ancient Artillery"}
+            ]
+        },
+        { name: "Stone Defense",
+          decks:
+            [   {"name": "Cave Bear"},
+                {"name": "Ooze"},
+                {"name": "Sun Demon"}
+            ]
+        },
+        { name: "Rodent Liberation",
+          decks:
+            [   {"name": "Vermling Scout", "level": -1},
+                {"name": "Vermling Shaman"},
+                {"name": "Earth Demon", "health": "x2"}
+            ]
+        },
+        { name: "Caravan Escort",
+          decks:
+            [   {"name": "City Guard", "level": -2, "cards": [ [ true, "99", "* %move% +0", "* %attack% +0" ] ] },
+                {"name": "Bandit Guard"},
+                {"name": "Bandit Archer"},
+                {"name": "Inox Guard"},
+                {"name": "Inox Archer"},
+                {"name": "Inox Shaman"},
+                {"name": "Vermling Scout"},
+                {"name": "Vermling Shaman"},
+                {"name": "Cave Bear"}
+            ]
+        },
+        { name: "Unnatural Insults",
+          decks:
+            [   {"name": "Living Corpse"},
+                {"name": "Living Bones"},
+                {"name": "Cultist"},
+                {"name": "Inox Shaman"}
+            ]
+        },
+        { name: "Storage Fees",
+          decks:
+            [   {"name": "Hound"},
+                {"name": "Bandit Guard"},
+                {"name": "Bandit Archer"}
+            ]
+        },
+        { name: "Plane of Wild Beasts",
+          decks:
+            [   {"name": "Hound"},
+                {"name": "Spitting Drake"},
+                {"name": "Cave Bear", "health": "x2"}
+            ]
+        },
+        { name: "Harvesting the Night",
+          decks:
+            [   {"name": "Night Demon"},
+                {"name": "Deep Terror"}
+            ]
+        },
+        { name: "Plagued Crypt",
+          decks:
+            [   {"name": "Giant Viper"},
+                {"name": "Black Imp"}
+            ]
+        },
+        { name: "Battle of the Bards",
+          decks:
+            [   {"name": "Bandit Guard", "level": -2, "cards": [ [ true, "99", "* %move% +0", "* %attack% +0" ] ] },
+                {"name": "Bandit Archer", "level": -2, "cards": [ [ true, "99", "* %move% +0", "* %attack% +0" ] ] },
+                {"name": "City Guard"},
+                {"name": "City Archer"},
+                {"name": "Stone Golem"},
+                {"name": "Vermling Shaman"}
+            ]
+        },
+        { name: "Corrupted Hunt",
+          decks:
+            [   {"name": "Hound"},
+                {"name": "Earth Demon", "health": "x2"},
+                {"name": "Flame Demon", "retaliate": 2},
+                {"name": "Giant Viper", "attack": 1},
+                {"name": "Spitting Drake"}
+            ]
+        },
+        // no decks required - CityGuard does not move
+        { name: "Aftermath",
+          decks:
+            [ ]
+        },
+        { name: "Elemental Secrets",
+          decks:
+            [   {"name": "Flame Demon"},
+                {"name": "Earth Demon"},
+                {"name": "Frost Demon"},
+                {"name": "Wind Demon"}
+            ]
+        },
+        { name: "The Caged Bear",
+          decks:
+            [   {"name": "Hound"},
+                {"name": "Forest Imp"},
+                {"name": "Rending Drake"},
+                {"name": "Vermling Shaman"},
+                {"name": "Cave Bear"}
+            ]
+        }];        
+
+const CAMPAIGNS = { "Gloomhaven": CORE, "Into the Unknown": INTO_THE_UNKNOWN, "Solo Scenarios": SOLO_SCENARIOS };
+
 export default {};
-export { SCENARIO_DEFINITIONS };
+export { CAMPAIGNS };
