@@ -161,7 +161,7 @@ ul.tabcontainer .inactive
     box-shadow:         1em 0 1em rgba(0, 0, 0, 0.5);
     -webkit-transition: left 0.2s ease;
     transition:         left 0.2s ease;
-    z-index:            1;
+    z-index:            10;
 }
 
 .pane.inactive
@@ -207,4 +207,16 @@ ul.tabcontainer .inactive
 
 #active_decks li{
     margin-top: 15px;
+}
+
+#levels img {
+    opacity: .4;
+}
+
+#levels img.selected {
+    opacity: .8;
+}
+
+#levels img:hover {
+    opacity: .8;
 }

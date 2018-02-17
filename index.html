@@ -21,20 +21,15 @@
         <div id="progress"></div>
 
         <div class="panecontainer">
-
             <div id="settingspane" class="pane expanded">
                 <ul class="tabcontainer">
                     <li id="scenariotab" class="">Scenario</li>
                     <li id="deckstab" class="inactive">Decks</li>
                 </ul>
                 <div id="scenariospage" class="tabbody">
-                    <ul class="selectionlist">
-                        <li>
-                            Select level
-                            <input type="number" id="scenario_level" min="0" max="7" value="1">
-                        </li>
-                        <li id="campaigns">
-                        </li>
+                    <ul class="selectionlist" id="levels">
+                    </ul>
+                    <ul class="selectionlist" id="campaigns">
                     </ul>
                 </div>
                 <div id="deckspage" class="inactive tabbody">
@@ -63,6 +58,7 @@
 
         <input alt="Configure" id="settingsbtn" type="image" src="images/settings.svg" />
         <div id="scenarioname"></div>
+        
         <div id="tableau" style="font-size: 26.6px;"> <!-- base font size for all cards. Placed here to make it adjustable from javascript -->
         </div>
     </body>

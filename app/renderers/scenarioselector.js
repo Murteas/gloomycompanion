@@ -1,13 +1,15 @@
 'use strict';
 
-export class CampaignLevelSelector {
+import eventbus from '/app/tinycentraldispatch.js';
+import { setup_textbox } from '/app/utils.js';
 
-    constructor(name, scenarios, container, callback){
+export class ScenarioSelector {
+
+    constructor(name, scenarios, container){
         this.name = name;
         this.scenarios = scenarios;
         this.container = container;
         this.selected_scenario;
-        this.selected_callback = callback;
 
         this.shoud_display_scenario_box = scenarios[0].name.match(/^\#?\d/);
     } 
@@ -22,9 +24,7 @@ export class CampaignLevelSelector {
         this.scenario_number = this.create_scenario_number(this.container);
         this.button = this.create_button(this.container);
 
-        this.selectbox.addEventListener("change", () => this.read_settings());
-        this.scenario_number.addEventListener("change", () => this.read_box_settings());
-        this.scenario_number.addEventListener("keyup", () => this.delay(() => this.read_box_settings()));
+        this.selectbox.addEventListener("change", () => this.read_settings());60
     }
 
     create_selectbox(container){
@@ -56,11 +56,10 @@ export class CampaignLevelSelector {
         let span = document.createElement("span");
         span.textContent = "or enter scenario number";
 
-        let number = document.createElement("input"); 
-        number.setAttribute("type", "number");
-        number.setAttribute("min", 0);
-        number.setAttribute("max", this.scenarios.length+1);
-        number.value = 0;
+        let number = document.createElement("input");
+        let param = { type: "number", min: 0, max: this.scenarios.length+1, value: 0,
+                      callback: () => this.read_box_settings() }; 
+        setup_textbox(number, param);
 
         scenario_listitem.appendChild(span);
         scenario_listitem.appendChild(number);
@@ -74,10 +73,14 @@ export class CampaignLevelSelector {
         let button = document.createElement("button");
         button.textContent = "load scenario";
 
-        button.addEventListener("click", () => this.selected_callback(this.selected_scenario, this.name));
+        button.addEventListener("click", () => this.apply());
 
         button_listitem.appendChild(button);
         container.appendChild(button_listitem);
+    }
+
+    apply(){
+        eventbus.dispatch("menu_scenario", this, {  campaign: this.name, scenario:this.selected_scenario })
     }
 
     read_settings(){
@@ -100,4 +103,4 @@ export class CampaignLevelSelector {
     }
 }
 
-export default CampaignLevelSelector;
+export default ScenarioSelector;

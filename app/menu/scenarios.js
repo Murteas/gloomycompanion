@@ -2,52 +2,38 @@
 
 import eventbus from '/app/tinycentraldispatch.js';
 import { CAMPAIGNS } from '/app/data/scenarios.js';
-import CampaignLevelSelector from '/app/renderers/campaignlevelselector.js'
+import ScenarioSelector from '/app/renderers/scenarioselector.js'
+import LevelSelector from '/app/renderers/levelselector.js'
 
 export class Scenarios {
 	constructor(){
 		this.selected_scenario = {};
 
 		this.form = {
-			level: document.getElementById('scenario_level'),
-			load: document.getElementById('applyscenario'),
+			level: document.getElementById('levels'),
 			campaigns: document.getElementById('campaigns')
 		};
 
+		eventbus.listen("menu_level", undefined, (a) => this.selected_scenario.level = a.level);
+		eventbus.listen("menu_scenario", undefined, (a) => this.load_scenario(a));
+
+		let levelselector = new LevelSelector(this.form.level);
+		levelselector.render();
+
 		Object.keys(CAMPAIGNS).forEach((key) => {
-			let selector = new CampaignLevelSelector(key, CAMPAIGNS[key], this.form.campaigns, (scen, campaign) => this.load_scenario(scen, campaign) );
+			let selector = new ScenarioSelector(key, CAMPAIGNS[key], this.form.campaigns);
 			selector.render();
 		});
-
-		this.register_events(this.form.level);
-		this.read_settings(true);
 	}
 
-	load_scenario(scenario, campaign){
-		this.selected_scenario.scenario = scenario; 
-		this.selected_scenario.campaign = campaign;
+	load_scenario(scenario){
+		this.selected_scenario.scenario = scenario.scenario; 
+		this.selected_scenario.campaign = scenario.campaign;
+
+		if (!this.selected_scenario.scenario) return;
+		if (!this.selected_scenario.level) return;
 		
 		eventbus.dispatch("load_scenario", this, this.selected_scenario); 
-	}
-
-	register_events(element){
-		element.addEventListener("change", () => this.read_settings());
-		element.addEventListener("blur", () => this.read_settings());
-		element.addEventListener("keyup", () => this.read_settings(true));
-		element.addEventListener("focus", () => element.select());
-	}
-
-	read_settings(reset){
-
-		var level = parseInt(this.form.level.value);
-		if (isNaN(level))
-			level = 1;
-		level = Math.min(Math.max(1,level), 7);
-		this.selected_scenario.level = level;
-
-		if (!reset){
-			this.form.level.value = level;
-		}
 	}
 }
 
