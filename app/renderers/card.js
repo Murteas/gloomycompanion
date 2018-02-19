@@ -78,7 +78,9 @@ export class UICard {
         this.flip_up(true);
         this.removeClass("draw");
         this.addClass("discard");
-        this.addClass("top")
+        this.addClass("top");
+
+        window.setTimeout(() => this.removeClass('pull'), 800);
     }
 
     discard(){

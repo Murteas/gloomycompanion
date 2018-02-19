@@ -8,9 +8,12 @@ import { ModifierDeck } from '/app/decks/modifierdeck.js';
 import { AbilityDeck } from '/app/decks/abilitydeck.js';
 import { ModifierDeckRenderer } from '/app/renderers/modifierdeck.js';
 import { AbilityDeckRenderer } from '/app/renderers/abilitydeck.js';
+import { DeckOrderer } from '/app/renderers/deckorderer.js';
 
 class Tableau {
 	constructor(container){
+		this.modifier_deck_renderer;
+
 		this.container = container;
 
 		this.ability_decks = [];
@@ -21,6 +24,8 @@ class Tableau {
 		
 		eventbus.listen("load_deck", undefined, (p) => this.load_deck(p));
 		eventbus.listen("deck_remove", undefined, (p) => this.remove_deck(p.deck))
+
+		this.deckorderer = new DeckOrderer(this.ability_decks, this.container );
 	}
 
 	activate_verbose(){

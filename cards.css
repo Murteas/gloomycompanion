@@ -557,4 +557,5 @@ img[src="images/shuffle.svg"]
     width: 0%;
     background-color: red;
     height: 4px;
+    z-index: 100;
 }
