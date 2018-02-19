@@ -73,7 +73,7 @@ export class ModifierDeckRenderer extends DeckRenderer {
 
         let text_element = document.createElement("div");
         text_element.className = "icon-text";
-        text_element.innerText = "0";
+        text_element.textContent = "0";
 
         if (increment_event)
             widget_container.appendChild(this.create_button(card_type, "decrement", "-", increment_event, text_element));
@@ -83,14 +83,17 @@ export class ModifierDeckRenderer extends DeckRenderer {
         if (decrement_event)
             widget_container.appendChild(this.create_button(card_type, "increment", "+", decrement_event, text_element));
 
-        eventbus.listen("modifier_deck_changed", this.deck, (e) => { if (e[card_type] !== undefined) text_element.innerText = e[card_type]; });
+        if (card_type === "round")
+            eventbus.listen("new_turn", undefined, (e) => { text_element.textContent = e.turn || 0; });
+        else
+            eventbus.listen("modifier_deck_changed", this.deck, (e) => { if (e[card_type] !== undefined) text_element.textContent = e[card_type]; });
 
         return widget_container;
     }
     create_button(card_type, class_name, text, event_name, text_element) {
         var button = document.createElement("div");
         button.className = class_name + " button";
-        button.innerText = text;
+        button.textContent = text;
 
         eventbus.onclick(button, event_name, this.deck, {type: card_type});
 
