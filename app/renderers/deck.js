@@ -8,17 +8,16 @@ export class DeckRenderer{
         this.deck = deck;
         this.container = container;
         this.uiCards = [];
-        this.deck_space = container;
     }
 
     render(){
 
         this.uiCards.forEach((c, i) => {
             c.set_depth((i * -1)-1);
-            c.attach(this.deck_space);
+            c.attach(this.container);
         });
 
-        eventbus.onclick(this.deck_space, 'draw_cards', this.deck, {cards: 1});
+        eventbus.onclick(this.container, 'draw_cards', this.deck, {cards: 1});
         eventbus.listen('cards_drawn', this.deck, (p) => this.ondrawn(p.cards) );
         eventbus.listen('deck_shuffled', this.deck, (p) => this.onshuffled(p.deck) );
 
@@ -26,7 +25,7 @@ export class DeckRenderer{
     }
 
     remove(){
-        this.deck_space.remove();
+        this.container.remove();
     }
 
     remove_drawn(){
@@ -72,9 +71,9 @@ export class DeckRenderer{
     }
 
     move_to_top(uiCard){
-        let topCard = this.deck_space.children[0];
-        this.deck_space.insertBefore(uiCard.front,topCard);
-        this.deck_space.insertBefore(uiCard.back,topCard);
+        let topCard = this.container.children[0];
+        this.container.insertBefore(uiCard.front,topCard);
+        this.container.insertBefore(uiCard.back,topCard);
     }
 }
 

@@ -6,7 +6,7 @@ import eventbus from '/app/tinycentraldispatch.js';
 
 import { ModifierDeck } from '/app/decks/modifierdeck.js';
 import { AbilityDeck } from '/app/decks/abilitydeck.js';
-import { ModifierDeckRenderer } from '/app/renderers/modifierdeck.js';
+import { ModifierDeckContainer } from '/app/renderers/modifierdeckcontainer.js';
 import { AbilityDeckRenderer } from '/app/renderers/abilitydeck.js';
 import { DeckOrderer } from '/app/renderers/deckorderer.js';
 
@@ -51,7 +51,7 @@ class Tableau {
 	 	this.modifier_deck = new ModifierDeck();
 	 	this.modifier_deck.shuffle();
 
-	 	this.modifier_deck_renderer = new ModifierDeckRenderer(this.modifier_deck, modifier_container);
+	 	this.modifier_deck_renderer = new ModifierDeckContainer(this.modifier_deck, modifier_container);
 	 	this.modifier_deck_renderer.render();
 
 	 	eventbus.dispatch("deck_loaded", this.modifier_deck, {deck: this.modifier_deck});

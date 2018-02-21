@@ -17,7 +17,7 @@ export class AbilityDeckRenderer extends DeckRenderer {
         window.setTimeout(() => {
             if (this.deck.is_active === false) 
                 this.remove_drawn();
-            toggle_class(this.deck_space, 'unused', !(this.deck.is_active !== false) );
+            toggle_class(this.container, 'unused', !(this.deck.is_active !== false) );
         }, 100);
     }
 
