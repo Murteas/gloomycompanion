@@ -53,7 +53,8 @@ export class DeckRenderer{
 
     onshuffled(deck){
 
-        this.remove_drawn();
+        if (!!deck.stats || deck.discard.length == 0)
+            this.remove_drawn();
         
         let uiCards = this.get_uicards_from_pile(deck);
 

@@ -20,7 +20,7 @@ export class ModifierDeckRenderer extends DeckRenderer {
 
     onadd(card) {
         var uicard = new UICard(card).init();
-        uicard.attach(this.deck_space);
+        uicard.attach(this.container);
         uicard.set_depth(-50);
         this.uiCards.push(uicard);
     }
