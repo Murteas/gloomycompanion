@@ -29,10 +29,10 @@
     max-width:                  147.6vh;
     margin:                     8px;
 
-    -webkit-transition:opacity 250ms ease-out;
-    -moz-transition:opacity 250ms ease-out;
-    -o-transition:opacity 250ms ease-out;
-    transition:opacity 250ms ease-out;
+    -webkit-transition:opacity 250ms ease-in;
+    -moz-transition:opacity 250ms ease-in;
+    -o-transition:opacity 250ms ease-in;
+    transition:opacity 250ms ease-in;
 }
 
 .modifier-deck-column-1
@@ -139,6 +139,12 @@
     bottom:                     -45%;
     width:                      20%;
     height:                     20%;
+
+    opacity: 1;
+    -webkit-transition:opacity 250ms ease-in;
+    -moz-transition:opacity 250ms ease-in;
+    -o-transition:opacity 250ms ease-in;
+    transition:opacity 250ms ease-in;
 }
 
 .card-container.unused 
@@ -254,13 +260,6 @@
     100%                        { z-index:  0; transform: translate(0, 0)           rotateY(180deg); }
 }
 
-@keyframes lift
-{
-    0%                          { z-index: -1; }
-    50%                         { z-index: -1; }
-    100%                        { z-index: -4; }
-}
-
 @-webkit-keyframes pull-front
 {
     0%                          { z-index: -3; -webkit-transform: translate3d(-1rem, -1rem, 1000px) rotateY(180deg); }
@@ -275,6 +274,13 @@
     49%                         { z-index: -2; -webkit-transform: translate3d(-50%, -20%, 2000px)   rotateY(90deg); }
     51%                         { z-index:  0; -webkit-transform: translate3d(-50%, -20%, 4000px)   rotateY(90deg); }
     100%                        { z-index:  0; -webkit-transform: translate3d(0, 0, 4000px)         rotateY(180deg); }
+}
+
+@keyframes lift
+{
+    0%                          { z-index: -1; }
+    50%                         { z-index: -1; }
+    100%                        { z-index: -4; }
 }
 
 @-webkit-keyframes lift

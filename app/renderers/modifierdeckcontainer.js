@@ -2,6 +2,7 @@
 
 import eventbus from '/app/tinycentraldispatch.js'
 import ModifierDeckRenderer from '/app/renderers/modifierdeck.js';
+import { toggle_class } from '/app/utils.js'; 
 
 export class ModifierDeckContainer {
     constructor(deck, container){
@@ -40,6 +41,9 @@ export class ModifierDeckContainer {
         
         eventbus.onclick(draw_two_button, 'draw_cards', this.deck, {cards: 2});
         eventbus.onclick(end_round_div, 'end_round', this.deck);
+
+        eventbus.listen('shuffle_required', this.deck, () => toggle_class(end_round_div, "not-required", false));
+        eventbus.listen('deck_shuffled', this.deck, () => toggle_class(end_round_div, "not-required", true));
 
         let renderer = new ModifierDeckRenderer(this.deck, this.deck_space);
         renderer.render();
