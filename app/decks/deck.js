@@ -14,6 +14,8 @@ export class Deck {
 
         eventbus.listen("draw_cards", this, (p) => this.draw(p.cards));
         eventbus.listen("end_round", () => this.shuffle_required, () => { this.reset_deck().shuffle();});
+        eventbus.listen("decks_usage", () => this.shuffle_required && this.is_active === false, () => { this.reset_deck().shuffle();});
+
         eventbus.listen("deck_shuffle", this, () => { this.shuffle_required = true; this.reset_deck().shuffle();});
     }
     shuffle(){

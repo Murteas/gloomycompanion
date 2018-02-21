@@ -29,6 +29,14 @@ export class DeckRenderer{
         this.deck_space.remove();
     }
 
+    remove_drawn(){
+        this.uiCards.forEach((card, i) => {
+            card.discard();
+            card.set_depth((i * -1)-1);
+            card.split(0);
+        });
+    }
+
     ondrawn(cards) {
         this.uiCards.forEach((c, i) => {
             c.push_down();
@@ -46,13 +54,10 @@ export class DeckRenderer{
 
     onshuffled(deck){
 
+        this.remove_drawn();
+        
         let uiCards = this.get_uicards_from_pile(deck);
 
-        uiCards.forEach((card, i) => {
-            card.discard();
-            card.set_depth((i * -1)-1);
-            card.split(0);
-        });
         window.setTimeout(()=>{
             let topCard = uiCards[0];
             this.move_to_top(topCard);

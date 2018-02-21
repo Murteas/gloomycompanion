@@ -28,6 +28,11 @@
     width:                      calc(437px + 1rem); /* 437px == card image width */
     max-width:                  147.6vh;
     margin:                     8px;
+
+    -webkit-transition:opacity 250ms ease-out;
+    -moz-transition:opacity 250ms ease-out;
+    -o-transition:opacity 250ms ease-out;
+    transition:opacity 250ms ease-out;
 }
 
 .modifier-deck-column-1
@@ -558,4 +563,5 @@ img[src="images/shuffle.svg"]
     background-color: red;
     height: 4px;
     z-index: 100;
+    border-bottom: 1px solid white;
 }

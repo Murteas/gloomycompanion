@@ -14,6 +14,9 @@ class DetectUnusedDecks{
 
     detect_unused(turn){
 
+        if (turn.turn == 1)
+            return;
+
         this.available_decks.forEach((deck) => deck.is_active = false);
         this.decks_drawn.forEach((deck) => deck.is_active = true);
 
@@ -30,6 +33,10 @@ class DetectUnusedDecks{
     }
 
     save_deck(e){
+        if (!e.deck.is_active){
+            e.deck.is_active = true;
+            eventbus.dispatch("decks_usage", undefined, {decks: [e.deck]});
+        }
         this.decks_drawn.push(e.deck);
     }
 }
