@@ -1,14 +1,15 @@
-SPECIAL_VALUES =
+
+
+const SPECIAL_VALUES =
 {
   "X": "X = Hexes moved",
   "C": "C = Number of Characters",
   "V": "V = Number of Scouts present"
 }
 
-MONSTER_STATS = {
-  "monsters": {
+const MONSTER_STATS = {
     "Ancient Artillery": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -156,7 +157,7 @@ MONSTER_STATS = {
       ]
     },
     "Bandit Archer": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -304,7 +305,7 @@ MONSTER_STATS = {
       ]
     },
     "Bandit Guard": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -462,7 +463,7 @@ MONSTER_STATS = {
       ]
     },
     "Black Imp": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -637,7 +638,7 @@ MONSTER_STATS = {
       ]
     },
     "Cave Bear": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -791,7 +792,7 @@ MONSTER_STATS = {
       ]
     },
     "City Archer": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -962,7 +963,7 @@ MONSTER_STATS = {
       ]
     },
     "City Guard": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -1137,7 +1138,7 @@ MONSTER_STATS = {
       ]
     },
     "Cultist": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -1293,7 +1294,7 @@ MONSTER_STATS = {
       ]
     },
     "Deep Terror": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -1461,7 +1462,7 @@ MONSTER_STATS = {
       ]
     },
     "Earth Demon": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -1617,7 +1618,7 @@ MONSTER_STATS = {
       ]
     },
     "Flame Demon": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -1817,7 +1818,7 @@ MONSTER_STATS = {
       ]
     },
     "Frost Demon": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -1985,7 +1986,7 @@ MONSTER_STATS = {
       ]
     },
     "Forest Imp": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -2182,7 +2183,7 @@ MONSTER_STATS = {
       ]
     },
     "Giant Viper": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -2354,7 +2355,7 @@ MONSTER_STATS = {
       ]
     },
     "Harrower Infester": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -2522,7 +2523,7 @@ MONSTER_STATS = {
       ]
     },
     "Hound": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -2690,7 +2691,7 @@ MONSTER_STATS = {
       ]
     },
     "Inox Archer": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -2842,7 +2843,7 @@ MONSTER_STATS = {
       ]
     },
     "Inox Guard": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -3006,7 +3007,7 @@ MONSTER_STATS = {
       ]
     },
     "Inox Shaman": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -3146,7 +3147,7 @@ MONSTER_STATS = {
       ]
     },
     "Living Bones": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -3332,7 +3333,7 @@ MONSTER_STATS = {
       ]
     },
     "Living Corpse": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -3484,7 +3485,7 @@ MONSTER_STATS = {
       ]
     },
     "Living Spirit": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -3672,7 +3673,7 @@ MONSTER_STATS = {
       ]
     },
     "Lurker": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -3870,7 +3871,7 @@ MONSTER_STATS = {
       ]
     },
     "Ooze": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -4046,7 +4047,7 @@ MONSTER_STATS = {
       ]
     },
     "Night Demon": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -4218,7 +4219,7 @@ MONSTER_STATS = {
       ]
     },
     "Rending Drake": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -4386,7 +4387,7 @@ MONSTER_STATS = {
       ]
     },
     "Savvas Icestorm": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -4570,7 +4571,7 @@ MONSTER_STATS = {
       ]
     },
     "Savvas Lavaflow": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -4747,7 +4748,7 @@ MONSTER_STATS = {
       ]
     },
     "Spitting Drake": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -4929,7 +4930,7 @@ MONSTER_STATS = {
       ]
     },
     "Stone Golem": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -5099,7 +5100,7 @@ MONSTER_STATS = {
       ]
     },
     "Sun Demon": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -5303,7 +5304,7 @@ MONSTER_STATS = {
       ]
     },
     "Vermling Scout": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -5443,7 +5444,7 @@ MONSTER_STATS = {
       ]
     },
     "Vermling Shaman": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -5623,7 +5624,7 @@ MONSTER_STATS = {
       ]
     },
     "Wind Demon": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "normal": {
@@ -5813,11 +5814,9 @@ MONSTER_STATS = {
           }
         }
       ]
-    }
-  },
-  "bosses": {
+    },
     "Bandit Commander": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "8xC",
@@ -5973,7 +5972,7 @@ MONSTER_STATS = {
       ]
     },
     "The Betrayer": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "10xC",
@@ -6145,7 +6144,7 @@ MONSTER_STATS = {
       ]
     },
     "Captain of the Guard": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "7xC",
@@ -6317,7 +6316,7 @@ MONSTER_STATS = {
       ]
     },
     "The Colorless": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "9xC",
@@ -6513,7 +6512,7 @@ MONSTER_STATS = {
       ]
     },
     "Dark Rider": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "9xC",
@@ -6701,7 +6700,7 @@ MONSTER_STATS = {
       ]
     },
     "Elder Drake": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "11xC",
@@ -6873,7 +6872,7 @@ MONSTER_STATS = {
       ]
     },
     "The Gloom": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "20xC",
@@ -7109,7 +7108,7 @@ MONSTER_STATS = {
       ]
     },
     "Inox Bodyguard": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "6xC",
@@ -7297,7 +7296,7 @@ MONSTER_STATS = {
       ]
     },
     "Jekserah": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "6xC",
@@ -7485,7 +7484,7 @@ MONSTER_STATS = {
       ]
     },
     "Merciless Overseer": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "6xC",
@@ -7649,7 +7648,7 @@ MONSTER_STATS = {
       ]
     },
     "Prime Demon": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "8xC",
@@ -7877,7 +7876,7 @@ MONSTER_STATS = {
       ]
     },
     "The Sightless Eye": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "7xC",
@@ -8057,7 +8056,7 @@ MONSTER_STATS = {
       ]
     },
     "Winged Horror": {
-      "level": [
+      "levels": [
         {
           "level": 0,
           "health": "6xC",
@@ -8260,5 +8259,6 @@ MONSTER_STATS = {
         }
       ]
     }
-  }
 };
+
+export { MONSTER_STATS as MONSTERS, SPECIAL_VALUES };

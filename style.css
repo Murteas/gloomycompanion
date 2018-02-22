@@ -5,6 +5,8 @@ body
     overflow-x:         hidden;
 
     margin-top:         30px;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .nobr
@@ -63,6 +65,7 @@ ul.tabcontainer li:not(:first-child)
 ul.tabcontainer .inactive
 {
     background-color:   #CCCCCC;
+    border-bottom:        1px solid black;   
 }
 
 .tabbody
@@ -87,12 +90,62 @@ ul.tabcontainer .inactive
     padding:            0;
 }
 
+.selectionlist input 
+{
+    margin:             5px;
+    width:              2em;
+    font-size:          1.6em;
+    text-align:         right;
+}
+
+.selectionlist .head{
+    font-size: 1.25em;
+    margin-bottom: 8px;
+    margin-top: 25px;
+    font-weight: bold;
+}
+
+#deckspage input{
+    display:            inline;
+    width:              2em;
+    font-size:          1.2em;
+}
+
+#deckspage select, #scenariospage select{
+    display:            inline;
+    font-size:          1.2em;
+}
+
+#deckspage input[type=checkbox]{
+    width:              1em;
+}
+
+#scenariospage input[type=button], #deckspage input[type=button]{
+    text-align:         center;
+    width:              auto;
+    font-size:          1.2em;
+}
+
+#scenarioname {
+    position:           absolute;
+    top:                30px;
+    left:               30px;
+    float:              left;
+    font-family:        'Philosopher';
+    font-size:          2em;
+    margin-left:       40px;
+    height:             2em;
+    line-height:        2em;
+    overflow:           hidden;
+}
+
 .panecontainer
 {
     position:           fixed;
     top:                0;
     left:               0;
     max-width:          100vw;
+    min-width:          425px;
     height:             0;
     z-index:            2;
 }
@@ -108,7 +161,7 @@ ul.tabcontainer .inactive
     box-shadow:         1em 0 1em rgba(0, 0, 0, 0.5);
     -webkit-transition: left 0.2s ease;
     transition:         left 0.2s ease;
-    z-index:            1;
+    z-index:            10;
 }
 
 .pane.inactive
@@ -136,4 +189,34 @@ ul.tabcontainer .inactive
     height:             5ch;
     cursor:             pointer;
     z-index:            1;
+}
+
+#active_decks span{
+    width: 250px;
+    display: inline-block;
+}
+
+#active_decks img {
+    height: 1.5em;
+
+    vertical-align: sub;
+    margin-left: 4px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+#active_decks li{
+    margin-top: 15px;
+}
+
+#levels img {
+    opacity: .4;
+}
+
+#levels img.selected {
+    opacity: .8;
+}
+
+#levels img:hover {
+    opacity: .8;
 }

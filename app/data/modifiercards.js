@@ -1,4 +1,6 @@
-var CARD_TYPES_MODIFIER =
+'use strict';
+
+const CARD_TYPES_MODIFIER =
 {
     BLESS:  "bless",
     CURSE:  "curse",
@@ -11,7 +13,7 @@ var CARD_TYPES_MODIFIER =
     DOUBLE: "double"
 };
 
-var MODIFIER_CARDS =
+const MODIFIER_CARDS =
     { BLESS:  { 'type': CARD_TYPES_MODIFIER.BLESS,  'shuffle': false, 'image': 'images/attack_mod_bless.jpg' }
     , CURSE:  { 'type': CARD_TYPES_MODIFIER.CURSE,  'shuffle': false, 'image': 'images/attack_mod_curse.jpg' }
     , PLUS0:  { 'type': CARD_TYPES_MODIFIER.PLUS0,  'shuffle': false, 'image': 'images/attack_mod_+0.jpg' }
@@ -23,7 +25,7 @@ var MODIFIER_CARDS =
     , DOUBLE: { 'type': CARD_TYPES_MODIFIER.DOUBLE, 'shuffle': true,  'image': 'images/attack_mod_2x.jpg' }
     };
 
-var MODIFIER_DECK =
+const MODIFIER_DECK =
     [ MODIFIER_CARDS.PLUS0,
     , MODIFIER_CARDS.PLUS0,
     , MODIFIER_CARDS.PLUS0,
@@ -45,3 +47,6 @@ var MODIFIER_DECK =
     , MODIFIER_CARDS.NULL,
     , MODIFIER_CARDS.DOUBLE,
     ];
+
+export default {};
+export { CARD_TYPES_MODIFIER, MODIFIER_CARDS, MODIFIER_DECK };

@@ -13,35 +13,54 @@
         <meta name="apple-mobile-web-app-title" content="Gloomy Companion" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script type="text/javascript" src="util.js"></script>
-        <script type="text/javascript" src="cards.js"></script>
-        <script type="text/javascript" src="scenarios.js"></script>
-        <script type="text/javascript" src="macros.js"></script>
-        <script type="text/javascript" src="modifiers.js"></script>
-        <script type="text/javascript" src="monster_stats.js"></script>
-        <script type="text/javascript" src="logic.js"></script>
-        <script type="text/javascript" src="ui.js"></script>
+
+        <script type="module" src="app/menu.js"></script>
+        <script type="module" src="app/tableau.js"></script>
+        <script type="module" src="app/plugin/turndetect.js"></script>
+        <script type="module" src="app/plugin/detectunuseddecks.js"></script>
     </head>
-    <body onload="init(); init_ui();">
+    <body>
+        <div id="progress"></div>
+
         <div class="panecontainer">
             <div id="settingspane" class="pane expanded">
                 <ul class="tabcontainer">
-                    <li id="scenariotab">Scenario</li>
-                    <li id="deckstab">Decks</li>
+                    <li id="scenariotab" class="">Scenario</li>
+                    <li id="deckstab" class="inactive">Decks</li>
                 </ul>
                 <div id="scenariospage" class="tabbody">
-                    <input id="applyscenario" type="button" value="Apply" />
-                    <br>
-                    <input id="applyload" type="button" value="Load Previous Scenario" />
+                    <ul class="selectionlist" id="levels">
+                    </ul>
+                    <ul class="selectionlist" id="campaigns">
+                    </ul>
                 </div>
-                <div id="deckspage" class="tabbody">
-                    <input id="applydecks" type="button" value="Apply" />
+                <div id="deckspage" class="inactive tabbody">
+                    <ul class="selectionlist">
+                        <li class="head">Add deck</li>
+                        <li>
+                            add <select id="additional_deck"></select> with level 
+                            <input type="number" id="additional_deck_level" min="0" max="7" value="1">
+                        </li>
+                        <li>
+                            <input id="applydeck" type="button" value="Add deck">
+                        </li>
+                        <li>
+                            <hr>
+                        </li>
+                        <ul class="selectionlist" id="active_decks">
+                            <li class="head">Decks on tableau</li>
+                        </ul>
+                    </ul>
                 </div>
             </div>
             <div id="cancelarea">
             </div>
         </div>
+
+
         <input alt="Configure" id="settingsbtn" type="image" src="images/settings.svg" />
+        <div id="scenarioname"></div>
+        
         <div id="tableau" style="font-size: 26.6px;"> <!-- base font size for all cards. Placed here to make it adjustable from javascript -->
         </div>
     </body>
