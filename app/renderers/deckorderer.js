@@ -33,6 +33,7 @@ export class DeckOrderer{
         
         param.ordered_decks.forEach(deck => {
             var subject = this.decks.find((d) => d.deck === deck );
+            if (!subject) return;
             var move = subject.renderer.container;
             this.container.appendChild(move, last_position)
             last_position = move;

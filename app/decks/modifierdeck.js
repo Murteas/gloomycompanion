@@ -18,6 +18,7 @@ export class ModifierDeck extends Deck {
 
         eventbus.listen("add_modifier", this, (e) => this.add(e.type));
         eventbus.listen("remove_modifier", this, (e) => this.remove(e.type));
+        eventbus.listen("end_round", () => this.shuffle_required, () => { this.reset_deck().shuffle();});
     }
 
     count(card_type){

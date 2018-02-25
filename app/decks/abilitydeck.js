@@ -15,6 +15,7 @@ export class AbilityDeck extends Deck{
         this.cards = [];
         this.level = level + (deckType.level || 0);
         this.level = Math.max(Math.min(7, this.level), 0);
+        this.timeout;
 
         let monster = MONSTERS[this.name];
         this.stats = monster.levels.find((l) => l.level === level);
@@ -30,11 +31,16 @@ export class AbilityDeck extends Deck{
             var c = new Card(deck.name + " " + clone[0], shuffle, {content: clone});
             this.cards.push(c);
         });
+
+        eventbus.listen("end_round", () => this.shuffle_required && !this.is_active, () => { this.reset_deck().shuffle();});
     }
 
     draw(draw_count){
+        window.clearTimeout(this.timeout);
+
         if (this.shuffle_required){
             this.reset_deck().shuffle();
+            this.timeout = window.setTimeout(() => this.draw(draw_count), 1250);
             return [];
         }
         super.draw(draw_count);
