@@ -14,7 +14,7 @@ class DetectUnusedDecks{
 
     detect_unused(turn){
 
-        if (turn.turn == 1)
+        if (turn.turn == 0)
             return;
 
         this.available_decks.forEach((deck) => deck.is_active = false);

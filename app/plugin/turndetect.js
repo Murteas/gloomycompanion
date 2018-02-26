@@ -9,7 +9,7 @@ class TurnDetect{
     constructor(){
         this.progressbar = document.getElementById("progress");
         this.progress = new Progress((percent, done) => this.show_bar(percent, done), 4000);
-        this.turn = 1;
+        this.turn = 0;
 
         eventbus.listen("cards_drawn", (a) => !!a.stats && a.is_active , ()=> this.progress.start());
         eventbus.listen("deck_shuffled", (a) => !!a.stats , ()=> this.progress.restart());
@@ -21,7 +21,7 @@ class TurnDetect{
     }
 
     reset(){
-        this.turn = 1;
+        this.turn = 0;
         eventbus.dispatch("new_turn", this, {turn: this.turn});
     }
 
